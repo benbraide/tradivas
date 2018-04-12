@@ -8,24 +8,30 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block img-fluid w-100" src="{{ asset('img/stock-1.jpg') }}" alt="First slide">
+                    <a href="/target">
+                        <img class="d-block img-fluid w-100" src="{{ asset('img/stock-1.jpg') }}" alt="First slide">
+                    </a>
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>...</h5>
-                        <p>...</p>
+                        <h5>Title</h5>
+                        <p>Description</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block img-fluid w-100" src="{{ asset('img/stock-2.jpg') }}" alt="Second slide">
+                    <a href="/target">
+                        <img class="d-block img-fluid w-100" src="{{ asset('img/stock-2.jpg') }}" alt="Second slide">
+                    </a>
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>...</h5>
-                        <p>...</p>
+                        <h5>Title</h5>
+                        <p>Description</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block img-fluid w-100" src="{{ asset('img/stock-3.jpg') }}" alt="Third slide">
+                    <a href="/target">
+                        <img class="d-block img-fluid w-100" src="{{ asset('img/stock-3.jpg') }}" alt="Third slide">
+                    </a>
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>...</h5>
-                        <p>...</p>
+                        <h5>Title</h5>
+                        <p>Description</p>
                     </div>
                 </div>
             </div>

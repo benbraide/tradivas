@@ -1,5 +1,22 @@
 body{
-    background: linear-gradient(to bottom, pink, white 30%) no-repeat;
+    background: linear-gradient(to bottom, var(--tradivas-bg-color-start), var(--tradivas-bg-color-stop) var(--tradivas-bg-color-start-proportion)) no-repeat;
+}
+
+.tradivas-btn{
+    background-color: var(--tradivas-btn-bg-color) !important;
+    border: none !important;
+    color: var(--tradivas-btn-color) !important;
+}
+
+.tradivas-btn:hover{
+    background-color: var(--tradivas-btn-bg-hilite-color) !important;
+    color: var(--tradivas-btn-hilite-color) !important;
+}
+
+input:focus, input[type]:focus{
+    outline: 0 none;
+    border-color: var(--tradivas-input-outline-color);
+    box-shadow: 0 1px 1px var(--tradivas-input-outline-color) inset, 0 0 8px var(--tradivas-input-outline-color);
 }
 
 .tradivas-header{
@@ -10,23 +27,27 @@ body{
     height: 100%;
 }
 
-.tradivas-logo{
+.tradivas-logo, .tradivas-logo:visited{
     width: 300px;
     height: 180px;
     outline: 1px dashed #98abb9;
     outline-offset: -5px;
-    background-color: pink;
+    background-color: var(--tradivas-bg-color-start);
     box-shadow: 2px 2px 2px gray;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.tradivas-logo:hover{
+    text-decoration: none;
+}
+
 .tradivas-logo > span{
     font-size: 60px;
     font-family: Helvetica, sans-serif;
     font-weight: bold;
-    color: white;
+    color: var(--tradivas-bg-color-stop);
 }
 
 .tradivas-header ul > li{
@@ -35,21 +56,33 @@ body{
     padding-right: 5px;
 }
 
-.tradivas-header ul > li + li{
-    border-left: 1px solid #777777;
+.tradivas-top-nav{
+    text-align: right;
+}
+
+.tradivas-top-nav ul > li + li{
+    border-left: 1px solid var(--tradivas-top-menu-color);
     padding-left: 5px;
 }
 
-.tradivas-header ul a, .tradivas-header ul a:visited{
-    color: #000;
+.tradivas-top-nav ul a, .tradivas-top-nav ul a:visited{
+    color: var(--tradivas-top-menu-color);
 }
 
-.tradivas-header ul a:hover{
-    color: #777;
+.tradivas-top-nav ul a:hover{
+    color: var(--tradivas-top-menu-hilite-color);
 }
 
-.tradivas-top-nav{
-    text-align: right;
+.tradivas-top-nav .dropdown-menu{
+    border: 1px solid var(--bg-color);
+}
+
+.tradivas-drop-down{
+    padding: 0 0 0 2px;
+}
+
+.tradivas-drop-down::after{
+    vertical-align: .155em !important;
 }
 
 .tradivas-nav-search input{
@@ -66,7 +99,15 @@ body{
 .tradivas-search-icon > span{
     font-weight: normal;
     font-size: 13px;
-    color: #777;
+    color: var(--light-color);
+}
+
+.tradivas-bottom-nav ul a, .tradivas-bottom-nav ul a:visited{
+    color: var(--tradivas-menu-color);
+}
+
+.tradivas-bottom-nav ul a:hover{
+    color: var(--tradivas-menu-hilite-color);
 }
 
 .tradivas-bottom-nav ul > li{
@@ -76,25 +117,12 @@ body{
 }
 
 .tradivas-bottom-nav ul > li + li{
-    padding-left: 7px;
-}
-
-.tradivas-bottom-nav ul a, .tradivas-bottom-nav ul a:visited{
-    color: #000;
-}
-
-.tradivas-bottom-nav ul a:hover{
-    color: #777;
-}
-
-.tradivas-footer{
-    border-top: 1px solid pink;
-    padding-top: 10px;
+    padding-left: 10px;
 }
 
 .tradivas-footer-head{
-    color: #777;
-    font-size: 18px;
+    color: var(--tradivas-footer-header-color);
+    font-size: var(--tradivas-footer-header-size);
 }
 
 .tradivas-header ul, .tradivas-bottom-nav ul, .tradivas-footer ul{
@@ -103,23 +131,72 @@ body{
     padding: 0;
 }
 
+.tradivas-footer-head.newsletter{
+    font-size: 15px;
+}
+
+.tradivas-footer-head-newsletter-form .form-control + .form-control, .tradivas-footer-head-newsletter-form .btn{
+    margin-top: 5px;
+}
+
 .tradivas-footer ul > li{
-    font-size: 14px;
+    font-size: var(--tradivas-footer-link-size);
+}
+
+.tradivas-footer a, .tradivas-footer a:visited{
+    color: var(--tradivas-footer-link-color);
+}
+
+.tradivas-footer a:hover{
+    color: var(--tradivas-footer-link-hilite-color);
 }
 
 .tradivas-display{
     width: 100%;
-    height: 600px;
-    background-color: #000;
-    overflow: hidden;
-    margin-bottom: 10px;
     border-radius: 5px;
 }
 
 .tradivas-display img{
-    height: 600px !important;
+    height: 700px !important;
 }
 
-.tradivas-home-content{
-    border-top: 1px solid pink;
+.tradivas-ruler{
+    border-top: var(--tradivas-bg-rule-width) var(--tradivas-bg-rule-style) var(--tradivas-bg-rule-color);
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.tradivas-home-card, .tradivas-home-full-card{
+    height: 540px;
+}
+
+.tradivas-home-card + .tradivas-home-card{
+    padding-left: 30px;
+}
+
+.tradivas-home-card img, .tradivas-home-full-card img{
+    width: 100%;
+    height: 100%;
+}
+
+.tradivas-home-full-card{
+    padding-top: 30px;
+}
+
+.tradivas-user-text{
+    font-size: 14px;
+}
+
+.tradivas-user-form button[type="submit"]{
+    margin: 5px 0 0 -10px;
+}
+
+.tradivas-user-form .submit{
+    align-items: center;
+}
+
+.tradivas-user-form a, .tradivas-user-form a:visited{
+    display: inline-block;
+    padding-left: 10px;
+    color: black;
 }

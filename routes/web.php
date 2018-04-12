@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('login', function () {
+    return view('login');
+})->middleware('guest');
+
+Route::get('register', function () {
+    return view('register');
+})->middleware('guest');
+
+Route::get('password', function () {
+    return view('password');
+})->middleware('guest');
