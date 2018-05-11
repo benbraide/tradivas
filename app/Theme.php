@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Theme extends Model
 {
     /**
-     * Get the page updates for the theme.
+     * Get the page update for the theme.
      */
     public function page_update()
     {
