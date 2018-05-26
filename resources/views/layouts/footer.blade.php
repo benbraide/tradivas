@@ -21,6 +21,9 @@
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/contact">Contact Us</a></li>
+                @admin
+                    <li><a href="/admin">Admin</a></li>
+                @endadmin
             </ul>
         </div>
         <div class="col-3">

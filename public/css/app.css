@@ -1,7 +1,3 @@
-body{
-    background: linear-gradient(to bottom, var(--tradivas-bg-color-start), var(--tradivas-bg-color-stop) var(--tradivas-bg-color-start-proportion)) no-repeat;
-}
-
 .tradivas-btn{
     background-color: var(--tradivas-btn-bg-color) !important;
     border: none !important;
@@ -17,6 +13,10 @@ input:focus, input[type]:focus{
     outline: 0 none;
     border-color: var(--tradivas-input-outline-color);
     box-shadow: 0 1px 1px var(--tradivas-input-outline-color) inset, 0 0 8px var(--tradivas-input-outline-color);
+}
+
+.tradivas-full-header{
+    background: linear-gradient(to bottom, var(--tradivas-bg-color-start), var(--tradivas-bg-color-stop) var(--tradivas-bg-color-start-proportion)) no-repeat;
 }
 
 .tradivas-header{
@@ -41,6 +41,11 @@ input:focus, input[type]:focus{
 
 .tradivas-logo:hover{
     text-decoration: none;
+}
+
+.tradivas-logo > img{
+    width: 100%;
+    height: 100%;
 }
 
 .tradivas-logo > span{
@@ -74,7 +79,7 @@ input:focus, input[type]:focus{
 }
 
 .tradivas-top-nav .dropdown-menu{
-    border: 1px solid var(--bg-color);
+    border: 1px solid var(--tradivas-bg-color-start);
 }
 
 .tradivas-drop-down{
@@ -100,6 +105,10 @@ input:focus, input[type]:focus{
     font-weight: normal;
     font-size: 13px;
     color: var(--light-color);
+}
+
+.tradivas-bottom-nav{
+    margin-top: 20px;
 }
 
 .tradivas-bottom-nav ul a, .tradivas-bottom-nav ul a:visited{
