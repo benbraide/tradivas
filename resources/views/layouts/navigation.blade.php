@@ -15,7 +15,7 @@
                                 role="button" aria-haspopup="true" aria-expanded="false"> My Account</a>
                                 @guest
                                     <div class="dropdown-menu">
-                                        <form method="POST" action="/loggingin" class="px-2 py-2">
+                                        <form method="POST" action="/attempt_login" class="px-2 py-2">
                                             @csrf
                                             <div class="form-group">
                                                 <input type="email" name="email" class="form-control" placeholder="Email" required>
@@ -39,7 +39,7 @@
                                         <a class="dropdown-item" href="#">Another action</a>
                                         <a class="dropdown-item" href="#">Something else here</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Separated link</a>
+                                        <a class="dropdown-item" href="/logout">Logout</a>
                                     </div>
                                 @endguest
                         </li>

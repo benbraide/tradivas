@@ -15,6 +15,7 @@ class CreateThemesTable extends Migration
     {
         Schema::create('themes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 100);
             $table->string('bg_color_start', 6);
             $table->string('bg_color_stop', 6);
             $table->smallInteger('bg_color_start_proportion');

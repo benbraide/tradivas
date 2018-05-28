@@ -19,7 +19,7 @@
             </div>
             <div class="col-7">
                 <h2>Sign Into Your Account</h2>
-                <form method="POST" action="/loggingin" class="tradivas-user-form">
+                <form method="POST" action="/attempt_login" class="tradivas-user-form">
                     @csrf
                     <div class="form-group row">
                         <label for="email" class="col-3 col-form-label">Email</label>

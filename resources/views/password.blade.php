@@ -19,7 +19,7 @@
             </div>
             <div class="col-7">
                 <h2>Recover Your Account Password</h2>
-                <form method="POST" action="/recover" class="tradivas-user-form">
+                <form method="POST" action="/attempt_password" class="tradivas-user-form">
                     @csrf
                     <div class="form-group row">
                         <label for="email" class="col-3 col-form-label">Email</label>
@@ -36,11 +36,3 @@
         </div>
     </div>
 @endsection
-
-@push('styles')
-    <style>
-        body{
-            background: linear-gradient(to bottom, pink, white 27%) no-repeat;
-        }
-    </style>
-@endpush

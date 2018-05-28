@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tradivas - @yield("title")</title>
+
+    <title>@yield("title") | Tradivas</title>
+
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/iconic/css/open-iconic-bootstrap.min.css') }}">
     
     @include('layouts.variables')
     
     @stack('variables')
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    
     @stack('styles')
 </head>
 <body>

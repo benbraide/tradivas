@@ -1,10 +1,17 @@
+@php
+
+$settings = App\Setting::first();
+$global_theme_id = ($settings ? $settings->theme_id : 1);
+
+@endphp
+
 @guest
-    <?php $theme_id = Cookie::get("theme_id", 1) ?>
+    <?php $theme_id = Cookie::get("theme_id", 0) ?>
 @else
-    <?php $theme_id = session("theme_id", 1) ?>
+    <?php $theme_id = Auth::user()->theme_id ?>
 @endguest
 <?php
-    $theme = App\Theme::find($theme_id);
+    $theme = App\Theme::find(($theme_id == 0) ? $global_theme_id : $theme_id);
     if (!$theme)
         $theme = App\Theme::first();
 ?>
@@ -36,7 +43,7 @@
         :root {
             --tradivas-bg-color-start: #FFC0CB;
             --tradivas-bg-color-stop: #FFF;
-            --tradivas-bg-color-start-proportion: 80px;
+            --tradivas-bg-color-start-proportion: 72%;
             --tradivas-bg-rule-color: #FFC0CB;
             --tradivas-bg-rule-width: 1px;
             --tradivas-bg-rule-style: solid;

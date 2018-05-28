@@ -9,10 +9,10 @@
     color: var(--tradivas-btn-hilite-color) !important;
 }
 
-input:focus, input[type]:focus{
-    outline: 0 none;
-    border-color: var(--tradivas-input-outline-color);
-    box-shadow: 0 1px 1px var(--tradivas-input-outline-color) inset, 0 0 8px var(--tradivas-input-outline-color);
+input:focus, input[type]:focus, textarea:focus, select:focus{
+    outline: 0 none !important;
+    border-color: var(--tradivas-input-outline-color) !important;
+    box-shadow: 0 1px 1px var(--tradivas-input-outline-color) inset, 0 0 8px var(--tradivas-input-outline-color) !important;
 }
 
 .tradivas-full-header{
