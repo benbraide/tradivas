@@ -26,16 +26,18 @@
                 @endadmin
             </ul>
         </div>
-        <div class="col-3">
-            <h2 class="tradivas-footer-head newsletter">Sign up to receive our newsletter</h2>
-            <form method="POST" action="/newsletter" class="tradivas-footer-head-newsletter-form">
-                @csrf
-                <div class="form-group">
-                    <input type="text" class="form-control form-control-sm" name="name" placeholder="Name">
-                    <input type="email" class="form-control form-control-sm" name="email" placeholder="Email" required>
-                    <button type="submit" class="btn tradivas-btn">Subscribe</button>
-                </div>
-            </form>
-        </div>
+        @guest
+            <div class="col-3">
+                <h2 class="tradivas-footer-head newsletter">Sign up to receive our newsletter</h2>
+                <form method="POST" action="/newsletter" class="tradivas-footer-head-newsletter-form">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-sm" name="name" placeholder="Name">
+                        <input type="email" class="form-control form-control-sm" name="email" placeholder="Email" required>
+                        <button type="submit" class="btn tradivas-btn">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        @endguest
     </div>
 </div>

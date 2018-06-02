@@ -28,11 +28,11 @@
 
 .tradivas-admin .tradivas-themes{
     padding-left: 0;
-    max-height: 100px;
+    max-height: 120px;
     overflow-y: auto;
 }
 
-.tradivas-admin .tradivas-theme-link > a, .tradivas-admin .tradivas-theme-link > a:visited{
+.tradivas-admin .tradivas-theme-link > a.tradivas-theme-anchor, .tradivas-admin .tradivas-theme-link > a.tradivas-theme-anchor:visited{
     font-size: 16px;
     color: #000;
 }
@@ -43,4 +43,13 @@
     width: 13px;
     height: 13px;
     border: 1px solid #000;
+}
+
+.tradivas-admin .tradivas-theme-link > a.tradivas-theme-link-anchor, .tradivas-admin .tradivas-theme-link > a.tradivas-theme-link-anchor:visited{
+    color: #dd2233;
+    margin-left: 5px;
+}
+
+.tradivas-admin .tradivas-theme-link > a > span{
+    font-size: 13px;
 }

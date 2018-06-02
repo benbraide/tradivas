@@ -1,3 +1,15 @@
+@php
+
+$categories = App\Category::all();
+
+@endphp
+
+@section('menu-categories')
+    @foreach ($categories as $category)
+        <li><a href="/cat/{{ $category->link }}">{{ ucwords($category->name) }}</a></li>
+    @endforeach
+@endsection
+
 <div class="tradivas-full-header">
     <div class="container tradivas-header">
         <div class="row align-items-center">
@@ -65,16 +77,7 @@
             <div class="col-12">
                 <ul>
                     <li><a href="/new-arrivals">Just In</a></li>
-                    <li><a href="/dresses">Dresses</a></li>
-                    <li><a href="/sets">Sets</a></li>
-                    <li><a href="/bottoms">Bottoms</a></li>
-                    <li><a href="/tops">Tops</a></li>
-                    <li><a href="/swim">Swim</a></li>
-                    <li><a href="/accessories">Accessories</a></li>
-                    <li><a href="/bags">Bags</a></li>
-                    <li><a href="/shoes">Shoes</a></li>
-                    <li><a href="/curvy">Curvy</a></li>
-                    <li><a href="/luxxy">Luxxy</a></li>
+                    @yield('menu-categories')
                 </ul>
             </div>
         </div>

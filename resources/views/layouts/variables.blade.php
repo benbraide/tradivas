@@ -1,7 +1,9 @@
 @php
 
-$settings = App\Setting::first();
-$global_theme_id = ($settings ? $settings->theme_id : 1);
+if (!isset($page_theme_id)) {
+    $settings = App\Setting::first();
+    $global_theme_id = ($settings ? $settings->theme_id : 1);
+}
 
 @endphp
 
@@ -11,7 +13,11 @@ $global_theme_id = ($settings ? $settings->theme_id : 1);
     <?php $theme_id = Auth::user()->theme_id ?>
 @endguest
 <?php
-    $theme = App\Theme::find(($theme_id == 0) ? $global_theme_id : $theme_id);
+    if (isset($page_theme_id))
+        $theme = App\Theme::find($page_theme_id);
+    else
+        $theme = App\Theme::find(($theme_id == 0) ? $global_theme_id : $theme_id);
+
     if (!$theme)
         $theme = App\Theme::first();
 ?>
