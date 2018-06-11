@@ -16,7 +16,10 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('theme_id')->length(10)->unsigned();
-            $table->string('images_base');
+            $table->string('images_base', 100);
+            $table->string('default_path', 100);
+            $table->string('default_image', 100);
+            $table->string('logo', 100);
             $table->timestamps();
         });
 

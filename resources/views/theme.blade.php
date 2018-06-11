@@ -25,6 +25,19 @@
     </select>
 @endsection
 
+@section('units')
+    <?php $units = array('px', 'em', 'rem', '%'); ?>
+    <select name="unit" class="form-control">
+        @foreach ($units as $unit)
+            @if ($unit == "px")
+                <option value="{{ $unit }}" selected="selected">{{ $unit }}</option>
+            @else
+                <option value="{{ $unit }}">{{ $unit }}</option>
+            @endif
+        @endforeach
+    </select>
+@endsection
+
 @section('content')
     <form method="POST" action="/themes/{{ ($page_theme_id == 0) ? 0 : $theme->id }}/update" class="tradivas-user-form">
         @csrf
@@ -53,7 +66,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->bg_color_start }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->bg_color_start }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -68,7 +81,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->bg_color_stop }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->bg_color_stop }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -77,8 +90,9 @@
                             @if ($page_theme_id == 0)
                                 <input type="text" id="color_proportion" name="color_proportion" value="72" class="form-control" placeholder="Header Color Proportion" required>
                             @else
-                                <input type="text" id="color_proportion" name="color_proportion" value="{{ $theme->bg_color_start_proportion }}" class="form-control" placeholder="Header Color Proportion" required>
+                                <input type="text" id="color_proportion" name="color_proportion" value="{{ intval($theme->bg_color_start_proportion) }}" class="form-control" placeholder="Header Color Proportion" required>
                             @endif
+                            @yield('units')
                         </div>
                     </div>
                     <div class="form-group row">
@@ -93,7 +107,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->bg_rule_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->bg_rule_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -102,8 +116,9 @@
                             @if ($page_theme_id == 0)
                                 <input type="text" id="rule_width" name="rule_width" value="1" class="form-control" placeholder="Rule Width" required>
                             @else
-                                <input type="text" id="rule_width" name="rule_width" value="{{ $theme->bg_rule_width }}" class="form-control" placeholder="Rule Width" required>
+                                <input type="text" id="rule_width" name="rule_width" value="{{ intval($theme->bg_rule_width) }}" class="form-control" placeholder="Rule Width" required>
                             @endif
+                            @yield('units')
                         </div>
                     </div>
                     <div class="form-group row">
@@ -124,7 +139,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->btn_bg_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->btn_bg_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -139,7 +154,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->btn_bg_hilite_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->btn_bg_hilite_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -154,7 +169,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->btn_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->btn_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -169,7 +184,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->btn_hilite_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->btn_hilite_color }};"></div>
                         @endif
                     </div>
                 </div>
@@ -186,7 +201,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->input_outline_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->input_outline_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -201,7 +216,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->top_menu_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->top_menu_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -216,7 +231,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->top_menu_hilite_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->top_menu_hilite_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -231,7 +246,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->menu_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->menu_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -246,7 +261,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->menu_hilite_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->menu_hilite_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -261,7 +276,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->footer_header_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->footer_header_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -270,8 +285,9 @@
                             @if ($page_theme_id == 0)
                                 <input type="text" id="footer_header_size" name="footer_header_size" value="23" class="form-control" placeholder="Footer Header Size" required>
                             @else
-                                <input type="text" id="footer_header_size" name="footer_header_size" value="{{ $theme->footer_header_size }}" class="form-control" placeholder="Footer Header Size" required>
+                                <input type="text" id="footer_header_size" name="footer_header_size" value="{{ intval($theme->footer_header_size) }}" class="form-control" placeholder="Footer Header Size" required>
                             @endif
+                            @yield('units')
                         </div>
                     </div>
                     <div class="form-group row">
@@ -286,7 +302,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->footer_link_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->footer_link_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -301,7 +317,7 @@
                         @if ($page_theme_id == 0)
                             <div class="tradivas-color-view"></div>
                         @else
-                            <div class="tradivas-color-view" style="background-color: {{ "#" . $theme->footer_link_hilite_color }};"></div>
+                            <div class="tradivas-color-view" style="background-color: {{ $theme->footer_link_hilite_color }};"></div>
                         @endif
                     </div>
                     <div class="form-group row">
@@ -310,8 +326,9 @@
                             @if ($page_theme_id == 0)
                                 <input type="text" id="footer_link_size" name="footer_link_size" value="14" class="form-control" placeholder="Footer Link Size" required>
                             @else
-                                <input type="text" id="footer_link_size" name="footer_link_size" value="{{ $theme->footer_link_size }}" class="form-control" placeholder="Footer Link Size" required>
+                                <input type="text" id="footer_link_size" name="footer_link_size" value="{{ intval($theme->footer_link_size) }}" class="form-control" placeholder="Footer Link Size" required>
                             @endif
+                            @yield('units')
                         </div>
                     </div>
                     <div class="col-9 offset-3 submit">
@@ -355,11 +372,12 @@
                 input.focus(function(){
                     $(this).colorpicker({
                         color: $(this).val(),
+                        colorFormat: "#HEX",
                     });
                 });
                 input.change(function(){
                     $(".tradivas-color-view", $(this).parent().parent()).css({
-                        "background-color": ("#" + $(this).val())
+                        "background-color": $(this).val(),
                     });
                 });
             });

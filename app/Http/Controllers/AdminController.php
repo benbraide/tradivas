@@ -44,7 +44,7 @@ class AdminController extends Controller{
         $item->price = $request->input("price");
         $item->category = $request->input("category");
         $item->sub_category = $request->input("sub_category", 0);
-        $item->serial = str_random(11);
+        $item->serial = str_random(30);
         $item->save();
 
         foreach ($request->input("colors") as $color){
@@ -59,18 +59,19 @@ class AdminController extends Controller{
             }
         }
 
+        if ($request->hasFile('cover')){
+            $image_mod = new \App\Image;
+            $image_mod->item_id = $item->id;
+            $image_mod->name = basename($request->file('cover')->store('images/' . $item->serial));
+            $image_mod->save();
+        }
+        
         if ($request->hasFile('images')){
-            $is_cover = true;
             foreach ($request->file('images') as $image){
                 $image_mod = new \App\Image;
                 $image_mod->item_id = $item->id;
-                $image_mod->name = str_random(11);
-                $image_mod->ext = $image->guessExtension();
-                $image_mod->is_cover = $is_cover;
+                $image_mod->name = basename($image->store('images/' . $item->serial));
                 $image_mod->save();
-                $image->storeAs(('public/images/' . $item->serial), ($image_mod->name . '.' . $image_mod->ext));
-                if ($is_cover)
-                    $is_cover = false;
             }
         }
         
@@ -82,8 +83,14 @@ class AdminController extends Controller{
             return redirect("/");
 
         $setting = \App\Setting::first();
+        if (!$setting)
+            $setting = new \App\Setting;
+        
         $setting->theme_id = $request->input("theme_id");
         $setting->images_base = $request->input("images_base");
+        $setting->default_path = $request->input("default_path");
+        $setting->default_image = $request->input("default_image");
+        $setting->logo = $request->input("logo");
         $setting->save();
         
         return redirect("admin");
@@ -101,9 +108,9 @@ class AdminController extends Controller{
         $theme->name = $request->input("name");
         $theme->bg_color_start = $request->input("color_start");
         $theme->bg_color_stop = $request->input("color_end");
-        $theme->bg_color_start_proportion = $request->input("color_proportion");
+        $theme->bg_color_start_proportion = ($request->input("color_proportion") . $request->input("unit", "px"));
         $theme->bg_rule_color = $request->input("rule_color");
-        $theme->bg_rule_width = $request->input("rule_width");
+        $theme->bg_rule_width = ($request->input("rule_width") . $request->input("unit". "px"));
         $theme->bg_rule_style = $request->input("rule_style");
         $theme->btn_bg_color = $request->input("btn_bg_color");
         $theme->btn_bg_hilite_color = $request->input("btn_bgh_color");
@@ -115,8 +122,8 @@ class AdminController extends Controller{
         $theme->menu_color = $request->input("menu_color");
         $theme->menu_hilite_color = $request->input("menu_h_color");
         $theme->footer_header_color = $request->input("footer_header_color");
-        $theme->footer_header_size = $request->input("footer_header_size");
-        $theme->footer_link_size = $request->input("footer_link_size");
+        $theme->footer_header_size = ($request->input("footer_header_size") . $request->input("unit", "px"));
+        $theme->footer_link_size = ($request->input("footer_link_size") . $request->input("unit", "px"));
         $theme->footer_link_color = $request->input("footer_link_color");
         $theme->footer_link_hilite_color = $request->input("footer_link_h_color");
         $theme->save();
@@ -124,7 +131,32 @@ class AdminController extends Controller{
         return redirect("admin");
     }
 
-    public function get_sub_categories(Request $request, $id){
+    public function createCategory(Request $request){
+        if (!Auth::user()->is_admin())
+            return redirect("/");
+
+        $cat = new \App\Category;
+        $cat->name = ucwords($request->input("cat_name"));
+        $cat->link = strtolower(str_slug($cat->name));
+        $cat->save();
+
+        return redirect("admin");
+    }
+
+    public function createSubCategory(Request $request){
+        if (!Auth::user()->is_admin())
+            return redirect("/");
+
+        $sub_cat = new \App\SubCategory;
+        $sub_cat->category_id = $request->input("category");
+        $sub_cat->name = ucwords($request->input("sub_cat_name") . " " . \App\Category::find($sub_cat->category_id)->name);
+        $sub_cat->link = strtolower(str_slug($sub_cat->name));
+        $sub_cat->save();
+
+        return redirect("admin");
+    }
+    
+    public function getSubCategories(Request $request, $id){
         $cat = \App\Category::find($id);
         return ($cat ? $cat->subCategories->toArray() : []);
     }

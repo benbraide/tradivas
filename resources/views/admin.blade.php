@@ -10,6 +10,15 @@ $categories = App\Category::all();
 $themes = App\Theme::all();
 $settings = App\Setting::first();
 
+if (!$settings){
+    $settings = new App\Setting;
+    $settings->theme_id = 1;
+    $settings->images_base = "http://image.tradivas.com/";
+    $settings->default_path = str_random(30);
+    $settings->default_image = (str_random(30) . ".png");
+    $settings->logo = (str_random(30) . ".png");
+}
+
 @endphp
 
 @section('colors')
@@ -54,7 +63,7 @@ $settings = App\Setting::first();
         <div class="tradivas-theme-link">
             <a href="/themes/{{ $theme->id }}" class="tradivas-theme-anchor">
                 {{ ucwords($theme->name) }}
-                <div style="background: linear-gradient(to bottom, {{ '#' . $theme->bg_color_start }}, {{ '#' . $theme->bg_color_stop }} 120%) no-repeat;"></div>
+                <div style="background: linear-gradient(to bottom, {{ $theme->bg_color_start }}, {{ $theme->bg_color_stop }} 120%) no-repeat;"></div>
             </a>
             <a href="/themes/{{ $theme->id }}/delete" class="tradivas-theme-link-anchor" title="Delete theme">
                 <span class="oi oi-x" aria-hidden="true"></span>
@@ -85,7 +94,7 @@ $settings = App\Setting::first();
                 </form>
                 <div class="tradivas-ruler"></div>
                 @if ($categories->isNotEmpty())
-                    <form method="POST" action="/cat/create" class="tradivas-user-form">
+                    <form method="POST" action="/subcat/create" class="tradivas-user-form">
                         @csrf
                         <div class="form-group row">
                             <label class="col-3 col-form-label">Category</label>
@@ -99,18 +108,12 @@ $settings = App\Setting::first();
                                 <input type="text" id="sub_cat_name" name="sub_cat_name" class="form-control" placeholder="Sub Category Name" required>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="sub_cat_link" class="col-3 col-form-label">Link</label>
-                            <div class="col-9">
-                                <input type="text" id="sub_cat_link" name="sub_cat_link" class="form-control" placeholder="Link" required>
-                            </div>
-                        </div>
                         <div class="col-9 offset-3 submit">
                             <button type="submit" class="btn login-btn tradivas-btn">Add Sub Category</button>
                         </div>
                     </form>
+                    <div class="tradivas-ruler"></div>
                 @endif
-                <div class="tradivas-ruler"></div>
                 <form method="POST" action="/sizes/create" class="tradivas-user-form">
                     @csrf
                     <div class="form-group row">
@@ -156,6 +159,24 @@ $settings = App\Setting::first();
                         <label for="images_base" class="col-3 col-form-label">Images Base</label>
                         <div class="col-9">
                             <input type="text" id="images_base" name="images_base" class="form-control" value="{{ $settings->images_base }}" placeholder="Images Base" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="default_path" class="col-3 col-form-label">Def Path</label>
+                        <div class="col-9">
+                            <input type="text" id="default_path" name="default_path" class="form-control" value="{{ $settings->default_path }}" placeholder="Default Path" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="default_image" class="col-3 col-form-label">Def Image</label>
+                        <div class="col-9">
+                            <input type="text" id="default_image" name="default_image" class="form-control" value="{{ $settings->default_image }}" placeholder="Default Image" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="logo" class="col-3 col-form-label">Logo Image</label>
+                        <div class="col-9">
+                            <input type="text" id="logo" name="logo" class="form-control" value="{{ $settings->logo }}" placeholder="Logo Image" required>
                         </div>
                     </div>
                     <div class="col-9 offset-3 submit">
@@ -208,13 +229,19 @@ $settings = App\Setting::first();
                                 @yield('categories')
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Sub Category</label>
+                            <div class="col-9">
+                                <select id="sub_category" name="sub_category" class="form-control">
+                                    <option value="0" selected disabled hidden>Choose Category</option>
+                                </select>
+                            </div>
+                        </div>
                     @endif
                     <div class="form-group row">
-                        <label class="col-3 col-form-label">Sub Category</label>
+                        <label class="col-3 col-form-label">Cover</label>
                         <div class="col-9">
-                            <select id="sub_category" name="sub_category" class="form-control">
-                                <option value="0" selected disabled hidden>Choose Category</option>
-                            </select>
+                            <input type="file" name="cover" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -226,7 +253,7 @@ $settings = App\Setting::first();
                     <div class="form-group row">
                         <label for="stock" class="col-3 col-form-label">Stock</label>
                         <div class="col-9">
-                            <input type="text" id="stock" name="stock" class="form-control" value="1" placeholder="Stock" required>
+                            <input type="number" id="stock" name="stock" class="form-control" value="1" min="1" placeholder="Stock" required>
                         </div>
                     </div>
                     <div class="col-9 offset-3 submit">

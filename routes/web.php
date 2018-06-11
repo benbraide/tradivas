@@ -49,5 +49,8 @@ Route::post('sizes/create', array('uses' => 'AdminController@createSize'))->midd
 Route::post('colors/create', array('uses' => 'AdminController@createColor'))->middleware('auth');
 Route::post('items/create', array('uses' => 'AdminController@createItem'))->middleware('auth');
 
+Route::post('cat/create', array('uses' => 'AdminController@createCategory'))->middleware('auth');
+Route::post('subcat/create', array('uses' => 'AdminController@createSubCategory'))->middleware('auth');
+
 Route::post('settings/update', array('uses' => 'AdminController@updateSettings'))->middleware('auth');
 Route::post('themes/{id}/update', array('uses' => 'AdminController@updateTheme'))->middleware('auth');
