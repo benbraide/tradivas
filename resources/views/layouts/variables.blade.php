@@ -41,7 +41,7 @@ if (!isset($page_theme_id)) {
             --tradivas-menu-hilite-color: {{ $theme->menu_hilite_color }};
             --tradivas-footer-header-color: {{ $theme->footer_header_color }};
             --tradivas-footer-header-size: {{ $theme->footer_header_size }};
-            --tradivas-footer-link-size: {{ $theme->footer_link_siz }};
+            --tradivas-footer-link-size: {{ $theme->footer_link_size }};
             --tradivas-footer-link-color: {{ $theme->footer_link_color }};
             --tradivas-footer-link-hilite-color: {{ $theme->footer_link_hilite_color }};
         }

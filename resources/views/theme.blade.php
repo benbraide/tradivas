@@ -14,7 +14,7 @@
         else
             $theme = App\Theme::find($page_theme_id);
     ?>
-    <select name="rule_style" class="form-control">
+    <select id="rule_style" name="rule_style" class="form-control">
         @foreach ($styles as $style)
             @if (($page_theme_id == 0 && $style == "solid") || ($page_theme_id != 0 && $theme->bg_rule_style == $style))
                 <option value="{{ $style }}" selected="selected">{{ ucfirst($style) }}</option>
@@ -58,31 +58,21 @@
                         <label for="color_start" class="col-3 col-form-label">Start Color</label>
                         <div class="col-9" title="Header Start Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="color_start" name="color_start" class="form-control" placeholder="Header Start Color" required>
+                                <input type="color" id="color_start" name="color_start" class="form-control" placeholder="Header Start Color" required>
                             @else
-                                <input type="text" id="color_start" name="color_start" value="{{ $theme->bg_color_start }}" class="form-control" placeholder="Header Start Color" required>
+                                <input type="color" id="color_start" name="color_start" value="{{ $theme->bg_color_start }}" class="form-control" placeholder="Header Start Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->bg_color_start }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="color_end" class="col-3 col-form-label">End Color</label>
                         <div class="col-9" title="Header End Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="color_end" name="color_end" class="form-control" placeholder="Header End Color" required>
+                                <input type="color" id="color_end" name="color_end" class="form-control" placeholder="Header End Color" required>
                             @else
-                                <input type="text" id="color_end" name="color_end" value="{{ $theme->bg_color_stop }}" class="form-control" placeholder="Header End Color" required>
+                                <input type="color" id="color_end" name="color_end" value="{{ $theme->bg_color_stop }}" class="form-control" placeholder="Header End Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->bg_color_stop }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="color_proportion" class="col-3 col-form-label">Proportion</label>
@@ -99,16 +89,11 @@
                         <label for="rule_color" class="col-3 col-form-label">Rule Color</label>
                         <div class="col-9" title="Rule Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="rule_color" name="rule_color" class="form-control" placeholder="Rule Color" required>
+                                <input type="color" id="rule_color" name="rule_color" class="form-control" placeholder="Rule Color" required>
                             @else
-                                <input type="text" id="rule_color" name="rule_color" value="{{ $theme->bg_rule_color }}" class="form-control" placeholder="Rule Color" required>
+                                <input type="color" id="rule_color" name="rule_color" value="{{ $theme->bg_rule_color }}" class="form-control" placeholder="Rule Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->bg_rule_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="rule_width" class="col-3 col-form-label">Rule Width</label>
@@ -131,61 +116,41 @@
                         <label for="btn_bg_color" class="col-3 col-form-label">Btn Bg Color</label>
                         <div class="col-9" title="Button Background Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="btn_bg_color" name="btn_bg_color" class="form-control" placeholder="Button Background Color" required>
+                                <input type="color" id="btn_bg_color" name="btn_bg_color" class="form-control" placeholder="Button Background Color" required>
                             @else
-                                <input type="text" id="btn_bg_color" name="btn_bg_color" value="{{ $theme->btn_bg_color }}" class="form-control" placeholder="Button Background Color" required>
+                                <input type="color" id="btn_bg_color" name="btn_bg_color" value="{{ $theme->btn_bg_color }}" class="form-control" placeholder="Button Background Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->btn_bg_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="btn_bgh_color" class="col-3 col-form-label">Btn Bgh Color</label>
                         <div class="col-9" title="Button Background Highlight Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="btn_bgh_color" name="btn_bgh_color" class="form-control" placeholder="Button Background Highlight Color" required>
+                                <input type="color" id="btn_bgh_color" name="btn_bgh_color" class="form-control" placeholder="Button Background Highlight Color" required>
                             @else
-                                <input type="text" id="btn_bgh_color" name="btn_bgh_color" value="{{ $theme->btn_bg_hilite_color }}" class="form-control" placeholder="Button Background Highlight Color" required>
+                                <input type="color" id="btn_bgh_color" name="btn_bgh_color" value="{{ $theme->btn_bg_hilite_color }}" class="form-control" placeholder="Button Background Highlight Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->btn_bg_hilite_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="btn_color" class="col-3 col-form-label">Button Color</label>
                         <div class="col-9" title="Button Text Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="btn_color" name="btn_color" class="form-control" placeholder="Button Color" required>
+                                <input type="color" id="btn_color" name="btn_color" class="form-control" placeholder="Button Color" required>
                             @else
-                                <input type="text" id="btn_color" name="btn_color" value="{{ $theme->btn_color }}" class="form-control" placeholder="Button Color" required>
+                                <input type="color" id="btn_color" name="btn_color" value="{{ $theme->btn_color }}" class="form-control" placeholder="Button Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->btn_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="btn_h_color" class="col-3 col-form-label">Button H Color</label>
                         <div class="col-9" title="Button Text Highlight Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="btn_h_color" name="btn_h_color" class="form-control" placeholder="Button Highlight Color" required>
+                                <input type="color" id="btn_h_color" name="btn_h_color" class="form-control" placeholder="Button Highlight Color" required>
                             @else
-                                <input type="text" id="btn_h_color" name="btn_h_color" value="{{ $theme->btn_hilite_color }}" class="form-control" placeholder="Button Highlight Color" required>
+                                <input type="color" id="btn_h_color" name="btn_h_color" value="{{ $theme->btn_hilite_color }}" class="form-control" placeholder="Button Highlight Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->btn_hilite_color }};"></div>
-                        @endif
                     </div>
                 </div>
                 <div class="col">
@@ -193,91 +158,61 @@
                         <label for="outline_color" class="col-3 col-form-label">Outline Color</label>
                         <div class="col-9" title="Input Outline Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="outline_color" name="outline_color" class="form-control" placeholder="Input Outline Color" required>
+                                <input type="color" id="outline_color" name="outline_color" class="form-control" placeholder="Input Outline Color" required>
                             @else
-                                <input type="text" id="outline_color" name="outline_color" value="{{ $theme->input_outline_color }}" class="form-control" placeholder="Input Outline Color" required>
+                                <input type="color" id="outline_color" name="outline_color" value="{{ $theme->input_outline_color }}" class="form-control" placeholder="Input Outline Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->input_outline_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="top_menu_color" class="col-3 col-form-label">Menu Color</label>
                         <div class="col-9" title="Top Menu Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="top_menu_color" name="top_menu_color" class="form-control" placeholder="Top Menu Color" required>
+                                <input type="color" id="top_menu_color" name="top_menu_color" class="form-control" placeholder="Top Menu Color" required>
                             @else
-                                <input type="text" id="top_menu_color" name="top_menu_color" value="{{ $theme->top_menu_color }}" class="form-control" placeholder="Top Menu Color" required>
+                                <input type="color" id="top_menu_color" name="top_menu_color" value="{{ $theme->top_menu_color }}" class="form-control" placeholder="Top Menu Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->top_menu_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="top_menu_h_color" class="col-3 col-form-label">Menu H Color</label>
                         <div class="col-9" title="Top Menu Highlight Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="top_menu_h_color" name="top_menu_h_color" class="form-control" placeholder="Top Menu Highlight Color" required>
+                                <input type="color" id="top_menu_h_color" name="top_menu_h_color" class="form-control" placeholder="Top Menu Highlight Color" required>
                             @else
-                                <input type="text" id="top_menu_h_color" name="top_menu_h_color" value="{{ $theme->top_menu_hilite_color }}" class="form-control" placeholder="Top Menu Highlight Color" required>
+                                <input type="color" id="top_menu_h_color" name="top_menu_h_color" value="{{ $theme->top_menu_hilite_color }}" class="form-control" placeholder="Top Menu Highlight Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->top_menu_hilite_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="menu_color" class="col-3 col-form-label">Menu Color</label>
                         <div class="col-9" title="Menu Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="menu_color" name="menu_color" class="form-control" placeholder="Menu Color" required>
+                                <input type="color" id="menu_color" name="menu_color" class="form-control" placeholder="Menu Color" required>
                             @else
-                                <input type="text" id="menu_color" name="menu_color" value="{{ $theme->menu_color }}" class="form-control" placeholder="Menu Color" required>
+                                <input type="color" id="menu_color" name="menu_color" value="{{ $theme->menu_color }}" class="form-control" placeholder="Menu Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->menu_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="menu_h_color" class="col-3 col-form-label">Menu H Color</label>
                         <div class="col-9" title="Menu Highlight Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="menu_h_color" name="menu_h_color" class="form-control" placeholder="Menu Highlight Color" required>
+                                <input type="color" id="menu_h_color" name="menu_h_color" class="form-control" placeholder="Menu Highlight Color" required>
                             @else
-                                <input type="text" id="menu_h_color" name="menu_h_color" value="{{ $theme->menu_hilite_color }}" class="form-control" placeholder="Menu Highlight Color" required>
+                                <input type="color" id="menu_h_color" name="menu_h_color" value="{{ $theme->menu_hilite_color }}" class="form-control" placeholder="Menu Highlight Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->menu_hilite_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="footer_header_color" class="col-3 col-form-label">Footer Color</label>
                         <div class="col-9" title="Footer Header Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="footer_header_color" name="footer_header_color" class="form-control" placeholder="Footer Header Color" required>
+                                <input type="color" id="footer_header_color" name="footer_header_color" class="form-control" placeholder="Footer Header Color" required>
                             @else
-                                <input type="text" id="footer_header_color" name="footer_header_color" value="{{ $theme->footer_header_color }}" class="form-control" placeholder="Footer Header Color" required>
+                                <input type="color" id="footer_header_color" name="footer_header_color" value="{{ $theme->footer_header_color }}" class="form-control" placeholder="Footer Header Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->footer_header_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="footer_header_size" class="col-3 col-form-label">Footer Size</label>
@@ -294,31 +229,21 @@
                         <label for="footer_link_color" class="col-3 col-form-label">Footer Color</label>
                         <div class="col-9" title="Footer Link Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="footer_link_color" name="footer_link_color" class="form-control" placeholder="Footer Link Color" required>
+                                <input type="color" id="footer_link_color" name="footer_link_color" class="form-control" placeholder="Footer Link Color" required>
                             @else
-                                <input type="text" id="footer_link_color" name="footer_link_color" value="{{ $theme->footer_link_color }}" class="form-control" placeholder="Footer Link Color" required>
+                                <input type="color" id="footer_link_color" name="footer_link_color" value="{{ $theme->footer_link_color }}" class="form-control" placeholder="Footer Link Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->footer_link_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="footer_link_h_color" class="col-3 col-form-label">Footer H Color</label>
                         <div class="col-9" title="Footer Link Highlight Color" data-toggle="tooltip">
                             @if ($page_theme_id == 0)
-                                <input type="text" id="footer_link_h_color" name="footer_link_h_color" class="form-control" placeholder="Footer Link Highlight Color" required>
+                                <input type="color" id="footer_link_h_color" name="footer_link_h_color" class="form-control" placeholder="Footer Link Highlight Color" required>
                             @else
-                                <input type="text" id="footer_link_h_color" name="footer_link_h_color" value="{{ $theme->footer_link_hilite_color }}" class="form-control" placeholder="Footer Link Highlight Color" required>
+                                <input type="color" id="footer_link_h_color" name="footer_link_h_color" value="{{ $theme->footer_link_hilite_color }}" class="form-control" placeholder="Footer Link Highlight Color" required>
                             @endif
                         </div>
-                        @if ($page_theme_id == 0)
-                            <div class="tradivas-color-view"></div>
-                        @else
-                            <div class="tradivas-color-view" style="background-color: {{ $theme->footer_link_hilite_color }};"></div>
-                        @endif
                     </div>
                     <div class="form-group row">
                         <label for="footer_link_size" class="col-3 col-form-label">Footer Size</label>
@@ -359,6 +284,9 @@
             border: 1px solid #000;
             z-index: 1;
         }
+        input[type=color].form-control{
+            padding: 0px;
+        }
     </style>
 @endpush
 
@@ -366,20 +294,57 @@
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/jquery.colorpicker.js') }}"></script>
     <script>
+        function valueChanged(){
+            var target = $(this).attr("id");
+            if (target === "color_start")
+                $("html").get(0).style.setProperty("--tradivas-bg-color-start", $(this).val());
+            else if (target === "color_end")
+                $("html").get(0).style.setProperty("--tradivas-bg-color-stop", $(this).val());
+            else if (target === "color_proportion")
+                $("html").get(0).style.setProperty("--tradivas-bg-color-start-proportion", ($(this).val() + $(this).siblings().eq(0).val()));
+            else if (target === "rule_color")
+                $("html").get(0).style.setProperty("--tradivas-bg-rule-color", $(this).val());
+            else if (target === "rule_width")
+                $("html").get(0).style.setProperty("--tradivas-bg-rule-width", ($(this).val() + $(this).siblings().eq(0).val()));
+            else if (target === "rule_style")
+                $("html").get(0).style.setProperty("--tradivas-bg-rule-style", $(this).val());
+            else if (target === "btn_bg_color")
+                $("html").get(0).style.setProperty("--tradivas-btn-bg-color", $(this).val());
+            else if (target === "btn_bgh_color")
+                $("html").get(0).style.setProperty("--tradivas-btn-bg-hilite-color", $(this).val());
+            else if (target === "btn_color")
+                $("html").get(0).style.setProperty("--tradivas-btn-color", $(this).val());
+            else if (target === "btn_h_color")
+                $("html").get(0).style.setProperty("--tradivas-btn-hilite-color", $(this).val());
+            else if (target === "outline_color")
+                $("html").get(0).style.setProperty("--tradivas-input-outline-color", $(this).val());
+            else if (target === "top_menu_color")
+                $("html").get(0).style.setProperty("--tradivas-top-menu-color", $(this).val());
+            else if (target === "top_menu_h_color")
+                $("html").get(0).style.setProperty("--tradivas-top-menu-hilite-color", $(this).val());
+            else if (target === "menu_color")
+                $("html").get(0).style.setProperty("--tradivas-menu-color", $(this).val());
+            else if (target === "menu_h_color")
+                $("html").get(0).style.setProperty("--tradivas-menu-hilite-color", $(this).val());
+            else if (target === "footer_header_color")
+                $("html").get(0).style.setProperty("--tradivas-footer-header-color", $(this).val());
+            else if (target === "footer_header_size")
+                $("html").get(0).style.setProperty("--tradivas-footer-header-size", ($(this).val() + $(this).siblings().eq(0).val()));
+            else if (target === "footer_link_size")
+                $("html").get(0).style.setProperty("--tradivas-footer-link-size", ($(this).val() + $(this).siblings().eq(0).val()));
+            else if (target === "footer_link_color")
+                $("html").get(0).style.setProperty("--tradivas-footer-link-color", $(this).val());
+            else if (target === "footer_link_h_color")
+                $("html").get(0).style.setProperty("--tradivas-footer-link-hilite-color", $(this).val());
+        }
+        
         $(function(){
-            $(".tradivas-color-view").each(function(){
-                var input = $(this).siblings(1).children().eq(0);
-                input.focus(function(){
-                    $(this).colorpicker({
-                        color: $(this).val(),
-                        colorFormat: "#HEX",
-                    });
-                });
-                input.change(function(){
-                    $(".tradivas-color-view", $(this).parent().parent()).css({
-                        "background-color": $(this).val(),
-                    });
-                });
+            $("div.col-9 > input").change(valueChanged);
+            $("div.col-9 > select[name!='unit']").change(valueChanged);
+
+            $("div.col-9 > select[name='unit']").change(function(){
+                var boundValueChanged = valueChanged.bind($(this).siblings().get(0));
+                boundValueChanged();
             });
         });
     </script>
