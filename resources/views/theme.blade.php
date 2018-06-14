@@ -25,19 +25,6 @@
     </select>
 @endsection
 
-@section('units')
-    <?php $units = array('px', 'em', 'rem', '%'); ?>
-    <select name="unit" class="form-control">
-        @foreach ($units as $unit)
-            @if ($unit == "px")
-                <option value="{{ $unit }}" selected="selected">{{ $unit }}</option>
-            @else
-                <option value="{{ $unit }}">{{ $unit }}</option>
-            @endif
-        @endforeach
-    </select>
-@endsection
-
 @section('content')
     <form method="POST" action="/themes/{{ ($page_theme_id == 0) ? 0 : $theme->id }}/update" class="tradivas-user-form">
         @csrf
@@ -77,12 +64,16 @@
                     <div class="form-group row">
                         <label for="color_proportion" class="col-3 col-form-label">Proportion</label>
                         <div class="col-9" title="Header Color Proportion" data-toggle="tooltip">
+                            <?php $matches = array(); preg_match('/([\d.]+)(.+)/', $theme->bg_color_start_proportion, $matches); ?>
                             @if ($page_theme_id == 0)
                                 <input type="text" id="color_proportion" name="color_proportion" value="72" class="form-control" placeholder="Header Color Proportion" required>
                             @else
-                                <input type="text" id="color_proportion" name="color_proportion" value="{{ intval($theme->bg_color_start_proportion) }}" class="form-control" placeholder="Header Color Proportion" required>
+                                <input type="text" id="color_proportion" name="color_proportion" value="{{ $matches[1] }}" class="form-control" placeholder="Header Color Proportion" required>
                             @endif
-                            @yield('units')
+                            @include('inc.unit', [
+                                "unit_name" => "color_proportion_unit",
+                                "active_unit" => $matches[2]
+                            ])
                         </div>
                     </div>
                     <div class="form-group row">
@@ -98,12 +89,16 @@
                     <div class="form-group row">
                         <label for="rule_width" class="col-3 col-form-label">Rule Width</label>
                         <div class="col-9" title="Rule Width" data-toggle="tooltip">
+                            <?php $matches = array(); preg_match('/([\d.]+)(.+)/', $theme->bg_rule_width, $matches); ?>
                             @if ($page_theme_id == 0)
                                 <input type="text" id="rule_width" name="rule_width" value="1" class="form-control" placeholder="Rule Width" required>
                             @else
-                                <input type="text" id="rule_width" name="rule_width" value="{{ intval($theme->bg_rule_width) }}" class="form-control" placeholder="Rule Width" required>
+                                <input type="text" id="rule_width" name="rule_width" value="{{ $matches[1] }}" class="form-control" placeholder="Rule Width" required>
                             @endif
-                            @yield('units')
+                            @include('inc.unit', [
+                                "unit_name" => "rule_width_unit",
+                                "active_unit" => $matches[2]
+                            ])
                         </div>
                     </div>
                     <div class="form-group row">
@@ -217,12 +212,16 @@
                     <div class="form-group row">
                         <label for="footer_header_size" class="col-3 col-form-label">Footer Size</label>
                         <div class="col-9" title="Footer Header Size" data-toggle="tooltip">
+                            <?php $matches = array(); preg_match('/([\d.]+)(.+)/', $theme->footer_header_size, $matches); ?>
                             @if ($page_theme_id == 0)
                                 <input type="text" id="footer_header_size" name="footer_header_size" value="23" class="form-control" placeholder="Footer Header Size" required>
                             @else
-                                <input type="text" id="footer_header_size" name="footer_header_size" value="{{ intval($theme->footer_header_size) }}" class="form-control" placeholder="Footer Header Size" required>
+                                <input type="text" id="footer_header_size" name="footer_header_size" value="{{ $matches[1] }}" class="form-control" placeholder="Footer Header Size" required>
                             @endif
-                            @yield('units')
+                            @include('inc.unit', [
+                                "unit_name" => "footer_header_size_unit",
+                                "active_unit" => $matches[2]
+                            ])
                         </div>
                     </div>
                     <div class="form-group row">
@@ -248,12 +247,16 @@
                     <div class="form-group row">
                         <label for="footer_link_size" class="col-3 col-form-label">Footer Size</label>
                         <div class="col-9" title="Footer Link Size" data-toggle="tooltip">
+                            <?php $matches = array(); preg_match('/([\d.]+)(.+)/', $theme->footer_link_size, $matches); ?>
                             @if ($page_theme_id == 0)
                                 <input type="text" id="footer_link_size" name="footer_link_size" value="14" class="form-control" placeholder="Footer Link Size" required>
                             @else
-                                <input type="text" id="footer_link_size" name="footer_link_size" value="{{ intval($theme->footer_link_size) }}" class="form-control" placeholder="Footer Link Size" required>
+                                <input type="text" id="footer_link_size" name="footer_link_size" value="{{ $matches[1] }}" class="form-control" placeholder="Footer Link Size" required>
                             @endif
-                            @yield('units')
+                            @include('inc.unit', [
+                                "unit_name" => "footer_link_size_unit",
+                                "active_unit" => $matches[2]
+                            ])
                         </div>
                     </div>
                     <div class="col-9 offset-3 submit">
@@ -325,9 +328,9 @@
         
         $(function(){
             $("div.col-9 > input").change(valueChanged);
-            $("div.col-9 > select[name!='unit']").change(valueChanged);
+            $("div.col-9 > select:not(.tradivas-unit)").change(valueChanged);
 
-            $("div.col-9 > select[name='unit']").change(function(){
+            $("div.col-9 > select.tradivas-unit").change(function(){
                 var boundValueChanged = valueChanged.bind($(this).siblings().get(0));
                 boundValueChanged();
             });

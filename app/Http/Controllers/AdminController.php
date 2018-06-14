@@ -108,9 +108,9 @@ class AdminController extends Controller{
         $theme->name = $request->input("name");
         $theme->bg_color_start = $request->input("color_start");
         $theme->bg_color_stop = $request->input("color_end");
-        $theme->bg_color_start_proportion = ($request->input("color_proportion") . $request->input("unit", "px"));
+        $theme->bg_color_start_proportion = ($request->input("color_proportion") . $request->input("color_proportion_unit", "px"));
         $theme->bg_rule_color = $request->input("rule_color");
-        $theme->bg_rule_width = ($request->input("rule_width") . $request->input("unit". "px"));
+        $theme->bg_rule_width = ($request->input("rule_width") . $request->input("rule_width_unit", "px"));
         $theme->bg_rule_style = $request->input("rule_style");
         $theme->btn_bg_color = $request->input("btn_bg_color");
         $theme->btn_bg_hilite_color = $request->input("btn_bgh_color");
@@ -122,8 +122,8 @@ class AdminController extends Controller{
         $theme->menu_color = $request->input("menu_color");
         $theme->menu_hilite_color = $request->input("menu_h_color");
         $theme->footer_header_color = $request->input("footer_header_color");
-        $theme->footer_header_size = ($request->input("footer_header_size") . $request->input("unit", "px"));
-        $theme->footer_link_size = ($request->input("footer_link_size") . $request->input("unit", "px"));
+        $theme->footer_header_size = ($request->input("footer_header_size") . $request->input("footer_header_size_unit", "px"));
+        $theme->footer_link_size = ($request->input("footer_link_size") . $request->input("footer_link_size_unit", "px"));
         $theme->footer_link_color = $request->input("footer_link_color");
         $theme->footer_link_hilite_color = $request->input("footer_link_h_color");
         $theme->save();
