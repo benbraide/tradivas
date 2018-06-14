@@ -22,13 +22,25 @@
     border: 1px solid var(--tradivas-bg-color-start);
 }
 
+.tradivas-admin .tradivas-themes-top > div.row > div.col-9{
+    height: 150px;
+    border: 1px solid var(--tradivas-bg-rule-color);
+    border-radius: .25rem;
+    padding-right: 0;
+}
+
 .tradivas-admin .tradivas-themes-top .col-3, .tradivas-admin-top .tradivas-themes .col-9{
+    padding-left: 0;
+}
+
+.tradivas-admin .tradivas-themes-top + div.container-fluid > div.row > div.col-9{
+    margin-top: 10px;
     padding-left: 0;
 }
 
 .tradivas-admin .tradivas-themes{
     padding-left: 0;
-    max-height: 120px;
+    max-height: 100%;
     overflow-y: auto;
 }
 

@@ -79,7 +79,7 @@ input:focus, input[type]:focus, textarea:focus, select:focus{
 }
 
 .tradivas-top-nav .dropdown-menu{
-    border: 1px solid var(--tradivas-bg-color-start);
+    border: 1px solid var(--tradivas-bg-rule-color);
 }
 
 .tradivas-drop-down{
@@ -88,6 +88,28 @@ input:focus, input[type]:focus, textarea:focus, select:focus{
 
 .tradivas-drop-down::after{
     vertical-align: .155em !important;
+}
+
+.tradivas-hover-dropdown > div.dropdown-menu {
+    margin-top: -1px;
+    font-size: 13px;
+    border: 1px solid var(--tradivas-bg-rule-color);
+}
+
+.tradivas-hover-dropdown > div.dropdown-menu > a {
+    padding-left: 10px;
+}
+
+.tradivas-hover-dropdown:hover > div.dropdown-menu {
+    display: block;
+}
+
+input#tradivas-query:focus {
+    width: 300px;
+}
+
+input#tradivas-query:focus + .tradivas-search-icon > span {
+    color: var(--tradivas-bg-color-start);
 }
 
 .tradivas-nav-search input{
@@ -104,7 +126,7 @@ input:focus, input[type]:focus, textarea:focus, select:focus{
 .tradivas-search-icon > span{
     font-weight: normal;
     font-size: 13px;
-    color: var(--light-color);
+    color: var(--tradivas-btn-color);
 }
 
 .tradivas-bottom-nav{

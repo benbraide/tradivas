@@ -270,20 +270,7 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/jqueryui/jquery-ui.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/colorpicker/jquery.colorpicker.css') }}">
     <style>
-        .tradivas-theme-container .col-9{
-            display: inline-block;
-        }
-        .tradivas-color-view{
-            display: inline-block;
-            margin: 11px 0 0 -40px;
-            width: 16px;
-            height: 16px;
-            border: 1px solid #000;
-            z-index: 1;
-        }
         input[type=color].form-control{
             padding: 0px;
         }
@@ -291,8 +278,6 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.colorpicker.js') }}"></script>
     <script>
         function valueChanged(){
             var target = $(this).attr("id");

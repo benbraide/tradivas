@@ -138,9 +138,8 @@ if (!$settings){
                     <div class="form-group row">
                         <label for="color_value" class="col-3 col-form-label">Color Value</label>
                         <div class="col-9">
-                            <input type="text" id="color_value" name="color_value" class="form-control" placeholder="Color Value" autocomplete="off" required>
+                            <input type="color" id="color_value" name="color_value" class="form-control" placeholder="Color Value" required>
                         </div>
-                        <div class="tradivas-color-view"></div>
                     </div>
                     <div class="col-9 offset-3 submit">
                         <button type="submit" class="btn login-btn tradivas-btn">Add Color</button>
@@ -264,8 +263,17 @@ if (!$settings){
                 <div class="container-fluid tradivas-themes-top">
                     <div class="row">
                         <label class="col-3">Themes</label>
-                        <div class="col-9 tradivas-themes">
-                            @yield('theme-links')
+                        <div class="col-9">
+                            <div class="tradivas-themes">
+                                @yield('theme-links')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-9 offset-3">
+                            <a href="/admin/categories" class="btn tradivas-btn">Edit Categories</a>
                         </div>
                     </div>
                 </div>
@@ -275,26 +283,17 @@ if (!$settings){
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/jqueryui/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/multiple-select.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/colorpicker/jquery.colorpicker.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <style>
-        .tradivas-color-view{
-            display: inline-block;
-            margin: 11px 0 0 -40px;
-            width: 16px;
-            height: 16px;
-            border: 1px solid #000;
-            z-index: 1;
+        input[type=color].form-control{
+            padding: 0px;
         }
     </style>
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/multiple-select.js') }}"></script>
-    <script src="{{ asset('js/jquery.colorpicker.js') }}"></script>
     <script>
         $(function(){
             $("select.tradivas-select").multipleSelect({
@@ -319,21 +318,6 @@ if (!$settings){
                             sub_category.append('<option value="' + item.id + '">' + item.name + '</option>');
                         });
                     }
-                });
-            });
-
-            $(".tradivas-color-view").each(function(){
-                var input = $(this).siblings(1).children().eq(0);
-                input.focus(function(){
-                    $(this).colorpicker({
-                        color: $(this).val(),
-                        colorFormat: "#HEX",
-                    });
-                });
-                input.change(function(){
-                    $(".tradivas-color-view", $(this).parent().parent()).css({
-                        "background-color": $(this).val()
-                    });
                 });
             });
         });

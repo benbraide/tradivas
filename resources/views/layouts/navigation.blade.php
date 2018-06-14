@@ -6,7 +6,10 @@ $categories = App\Category::all();
 
 @section('menu-categories')
     @foreach ($categories as $category)
-        <li><a href="/cat/{{ $category->link }}">{{ ucwords($category->name) }}</a></li>
+        <li class="dropdown tradivas-hover-dropdown">
+            <a href="/cat/{{ $category->link }}">{{ ucwords($category->name) }}</a>
+            @include('inc.sub_menu_cat')
+        </li>
     @endforeach
 @endsection
 
@@ -62,11 +65,11 @@ $categories = App\Category::all();
                     <form method="GET" action="/search" class="form-inline float-right tradivas-nav-search">
                         @csrf
                         <div class="form-group">
-                            <input type="search" class="form-control form-control-sm" name="query" placeholder="Search for a product">
+                            <input type="search" class="form-control form-control-sm" id="tradivas-query" name="query" placeholder="Search for a product">
+                            <button type="submit" class="tradivas-search-icon" title="Search" data-toggle="tooltip">
+                                <span class="oi oi-magnifying-glass" aria-hidden="true"></span>
+                            </button>
                         </div>
-                        <button type="submit" class="tradivas-search-icon" title="Search" data-toggle="tooltip">
-                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span>
-                        </button>
                     </form>
                 </div>
             </div>
@@ -83,3 +86,7 @@ $categories = App\Category::all();
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script src="{{ asset('js/bootstrap-hover-dropdown.min.js') }}"></script>
+@endpush
