@@ -22,15 +22,20 @@ class Item extends Model
     }
     
     public function image() {
-        return App\Image::where('item_id', $this->id)->where('is_cover', 1)->get();
+        $img = \App\Image::where('item_id', $this->id)->first();
+        if ($img)
+            return $img->path();
+        
+        $settings = \App\Setting::first();
+        return ($settings->full_default_path() . $settings->default_image);
     }
 
     public function link() {
-        return ;
+        return ('/item/' . str_slug($this->title) . '-' . $this->id);
     }
 
     public function salePrice() {
-        return ;
+        return null;
     }
 
     public function scopeCategory($query, $cat) {

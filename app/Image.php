@@ -14,11 +14,11 @@ class Image extends Model
     }
 
     public function path() {
-        $settings = App\Setting::first();
+        $settings = \App\Setting::first();
         if ($settings)
             $image_base = $settings->images_base;
         else
             $image_base = "http://image.tradivas.com/";
-        return ($images_base . $this->item->serial . '/' . $this->name);
+        return ($image_base . $this->item->serial . '/' . $this->name);
     }
 }

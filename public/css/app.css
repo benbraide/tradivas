@@ -104,6 +104,11 @@ input:focus, input[type]:focus, textarea:focus, select:focus{
     display: block;
 }
 
+input#tradivas-query{
+    width: 200px;
+    transition: width 0.25s;
+}
+
 input#tradivas-query:focus {
     width: 300px;
 }

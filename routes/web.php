@@ -27,6 +27,8 @@ Route::get('password', function () {
     return view('password');
 })->middleware('guest')->name('password');
 
+Route::get('cat/{link}', array('uses' => 'ItemController@listCategory'))->name('items');
+
 Route::get('admin', function () {
     if (Auth::user()->is_admin())
         return view('admin');
