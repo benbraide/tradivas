@@ -9,8 +9,34 @@
 @section('rule_styles')
     <?php
         $styles = array('solid', 'dotted', 'dashed', 'double', 'groove', 'ridge', 'inset', 'outset', 'initial');
-        if ($page_theme_id == 0)
-            $theme = null;
+        if ($page_theme_id == 0){
+            if (!App\Theme::first()){
+                $page_theme_id = 1;
+                $theme = new App\Theme;
+                $theme->bg_color_start = '#FFC0CB';
+                $theme->bg_color_stop = '#FFFFFF';
+                $theme->bg_color_start_proportion = '72%';
+                $theme->bg_rule_color = '#FFC0CB';
+                $theme->bg_rule_width = '1px';
+                $theme->bg_rule_style = 'solid';
+                $theme->btn_bg_color = '#FFC0CB';
+                $theme->btn_bg_hilite_color = '#FFB6C1';
+                $theme->btn_color = '#000000';
+                $theme->btn_hilite_color = '#000000';
+                $theme->input_outline_color = '#FFC0CB';
+                $theme->top_menu_color = '#000000';
+                $theme->top_menu_hilite_color = '#777777';
+                $theme->menu_color = '#000000';
+                $theme->menu_hilite_color = '#777777';
+                $theme->footer_header_color = '#000000';
+                $theme->footer_header_size = '23px';
+                $theme->footer_link_size = '14px';
+                $theme->footer_link_color = '#444444';
+                $theme->footer_link_hilite_color = '#777777';
+            }
+            else
+                $theme = null;
+        }
         else
             $theme = App\Theme::find($page_theme_id);
     ?>

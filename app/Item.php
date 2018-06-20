@@ -31,11 +31,7 @@ class Item extends Model
     }
 
     public function link() {
-        return ('/item/' . str_slug($this->title) . '-' . $this->id);
-    }
-
-    public function salePrice() {
-        return null;
+        return ('/item/' . $this->serial);
     }
 
     public function scopeCategory($query, $cat) {
@@ -48,5 +44,14 @@ class Item extends Model
         if ($cat == 0)
             return $query;
         return $query->where('sub_category', $cat);
+    }
+
+    public function scopeSalePrice($query) {
+        return $query->leftJoin('sales', 'sales.item_id', '=', 'items.id')
+            ->selectRaw('items.id, items.title, items.price as basePrice, items.created_at, sales.price as price');
+    }
+
+    public function discount() {
+        return round(((($this->base_price - $this->price) / $this->base_price) * 100), 2);
     }
 }

@@ -15,44 +15,49 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('login', function () {
+Route::get('/home', function () {
+    return redirect("/");
+})->name('home2');
+
+Route::get('/login', function () {
     return view('login');
 })->middleware('guest')->name('login');
 
-Route::get('register', function () {
+Route::get('/register', function () {
     return view('register');
 })->middleware('guest')->name('register');
 
-Route::get('password', function () {
+Route::get('/password', function () {
     return view('password');
 })->middleware('guest')->name('password');
 
-Route::get('cat/{link}', array('uses' => 'ItemController@listCategory'))->name('items');
+Route::get('/cat/{link}', array('uses' => 'ItemController@listCategory'))->name('items');
+Route::get('item/{serial}', array('uses' => 'ItemController@show'))->name('item');
 
-Route::get('admin', function () {
+Route::get('/admin', function () {
     if (Auth::user()->is_admin())
         return view('admin');
     return redirect('/');
 })->middleware('auth')->name('admin');
 
-Route::get('themes/{id}', function ($id) {
+Route::get('/themes/{id}', function ($id) {
     if (Auth::user()->is_admin())
         return view('theme', ['page_theme_id' => $id]);
     return redirect('/');
 })->middleware('auth')->name('themes');
 
-Route::get('logout', array('uses' => 'Auth\LoginController@logout'))->name('logout');
+Route::get('/logout', array('uses' => 'Auth\LoginController@logout'))->name('logout');
 
-Route::post('attempt_login', array('uses' => 'Auth\LoginController@login'));
-Route::post('attempt_register', array('uses' => 'Auth\RegisterController@register'));
-Route::post('attempt_password', array('uses' => 'Auth\ResetPasswordController@reset'));
+Route::post('/attempt_login', array('uses' => 'Auth\LoginController@login'));
+Route::post('/attempt_register', array('uses' => 'Auth\RegisterController@register'));
+Route::post('/attempt_password', array('uses' => 'Auth\ResetPasswordController@reset'));
 
-Route::post('sizes/create', array('uses' => 'AdminController@createSize'))->middleware('auth');
-Route::post('colors/create', array('uses' => 'AdminController@createColor'))->middleware('auth');
-Route::post('items/create', array('uses' => 'AdminController@createItem'))->middleware('auth');
+Route::post('/sizes/create', array('uses' => 'AdminController@createSize'))->middleware('auth');
+Route::post('/colors/create', array('uses' => 'AdminController@createColor'))->middleware('auth');
+Route::post('/items/create', array('uses' => 'AdminController@createItem'))->middleware('auth');
 
-Route::post('cat/create', array('uses' => 'AdminController@createCategory'))->middleware('auth');
-Route::post('subcat/create', array('uses' => 'AdminController@createSubCategory'))->middleware('auth');
+Route::post('/cat/create', array('uses' => 'AdminController@createCategory'))->middleware('auth');
+Route::post('/subcat/create', array('uses' => 'AdminController@createSubCategory'))->middleware('auth');
 
-Route::post('settings/update', array('uses' => 'AdminController@updateSettings'))->middleware('auth');
-Route::post('themes/{id}/update', array('uses' => 'AdminController@updateTheme'))->middleware('auth');
+Route::post('/settings/update', array('uses' => 'AdminController@updateSettings'))->middleware('auth');
+Route::post('/themes/{id}/update', array('uses' => 'AdminController@updateTheme'))->middleware('auth');

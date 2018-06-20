@@ -17,15 +17,48 @@ class ItemController extends Controller{
             $sub_category = null;
 
         if ($sub_category)
-            $items = \App\Item::where('category', $category->id)->where('sub_category', $sub_category->id)->paginate(35);
+            $items_db = $this->filterQuery($request, \App\Item::where('category', $category->id)->where('sub_category', $sub_category->id));
         else
-            $items = \App\Item::where('category', $category->id)->paginate(35);
+            $items_db = $this->filterQuery($request, \App\Item::where('category', $category->id));
 
         return view('items', [
             'link' => $link,
             'category' => $category,
             'sub_category' => $sub_category,
-            'items' => $items
+            'items' => $this->paginate($request, $items_db)
         ]);
+    }
+
+    public function show(Request $request, $serial){
+        return view('item', [
+            'item' => \App\Item::where('serial', $serial)->firstOrFail()
+        ]);
+    }
+
+    public function filterQuery($request, $query){
+        $sort_by = $request->input("sort", null);
+        if ($sort_by){
+            $sort = \App\Sort::where("label", $sort_by)->orWhere("id", $sort_by)->first();
+            if ($sort){
+                if ($sort->column == '?'){
+
+                }
+                else
+                    $query->orderBy($sort->column, $sort->direction);
+            }
+            else
+                $query->latest();
+        }
+        else
+            $query->latest();
+
+        return $query;
+    }
+
+    public function paginate($request, $query){
+        $result = $query->paginate($request->input("limit", 4));
+        if ($request->has('sort'))
+            $result->appends(['sort' => $request->input('sort')]);
+        return $result;
     }
 }
